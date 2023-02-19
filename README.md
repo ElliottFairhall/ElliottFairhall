@@ -1,12 +1,12 @@
-- 👋 Hi, I’m @ElliottFairhall
-- 👀 I’m interested in ... 
-Data Analytics, Data Engineering and developing business knowledge and the ability to share knowledge to make effective business decisions
-- 🌱 I’m currently learning ...
-Python, Power BI, Azure Data Factory and developing stratergies to manage data goverance. 
-- 💞️ I’m looking to collaborate on ...
-Education Software
-Anything, its all about the learning journey!
-- 📫 How to reach me ...
+Hello, I am Elliott Fairhall 👋
+
+🔍 I am interested in Data Analytics, Data Engineering, and developing business knowledge to make effective business decisions.
+
+🌱 Currently, I am learning Python, Power BI, Azure Data Factory, and developing strategies to manage data governance.
+
+💞 I am looking to collaborate on educational software. For me, it's all about the learning journey!
+
+📩 Feel free to reach me through my email at elliott@elliottfairhall.dev
 
 <!---
 ElliottFairhall/ElliottFairhall is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
