@@ -1,10 +1,48 @@
-👋 Hello, I'm Elliott Fairhall
+# 👋 Hello, I'm Elliott Fairhall
+
 With a strong work ethic and genuine passion for what I do, I'm always eager to take on new challenges and tackle complex problems. Whether it's working with a team or taking the lead, I'm dedicated to delivering high-quality results and making a meaningful impact in everything I do.
 
-🌱 Currently, I'm interested in Data Analytics, Data Engineering, and developing business knowledge to make effective business decisions. I'm learning Python, Power BI, Azure Data Factory, and developing strategies to manage data governance.
+## 🌱 Current Interests
+I'm deeply interested in:
+- **Data Analytics**
+- **Data Engineering**
+- **Developing Business Knowledge**
 
-💼 With over 15 years of experience as a leader, manager, educator, and data enthusiast, I bring a wealth of experience and skills to the table. As a professional with a passion for programming, cloud computing, and data engineering, I've completed several certification courses and programs, including cloud services, SaaS solutions, programming fundamentals, Microsoft Security, Compliance, and Identity solutions, artificial intelligence, Power Platform fundamentals, Git, Azure, PostgreSQL, Python, Data Science, and DevOps.
+Currently, I'm learning:
+- Python
+- Power BI
+- Azure Data Factory
+- Data Governance Strategies
 
-💻 I'm always excited to collaborate on innovative data analytics projects, especially those involving data pipelines. I'm passionate about solving complex data problems and leveraging insights to drive informed business decisions. I'm open to working with diverse teams and contributing my expertise in data analytics, cloud computing, and programming to deliver impactful results.
+## 💼 Professional Background
+With over 15 years of experience, I bring a wealth of expertise as a leader, manager, educator, and data enthusiast. My professional journey includes:
+- **Programming**: Python, Git
+- **Cloud Computing**: Azure, SaaS solutions
+- **Data Engineering**: PostgreSQL, Data Science
+- **Certifications**: Microsoft Security, Compliance, and Identity solutions, Artificial Intelligence, Power Platform fundamentals, DevOps
 
-📫 Feel free to reach me through my email at elliott@elliottfairhall.dev. Let's connect and see how we can work together!
+## 💻 Collaboration and Projects
+I'm always excited to collaborate on innovative data analytics projects, especially those involving data pipelines. I'm passionate about solving complex data problems and leveraging insights to drive informed business decisions.
+
+## 📫 Connect with Me
+Feel free to reach out via email: [elliott@elliottfairhall.dev](mailto:elliott@elliottfairhall.dev). Let's connect and explore how we can work together!
+
+---
+
+### 🛠️ Languages and Tools
+![Python](https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![Power BI](https://img.shields.io/badge/-Power%20BI-F2C811?style=flat-square&logo=Power%20BI&logoColor=black)
+![Azure](https://img.shields.io/badge/-Azure-0078D4?style=flat-square&logo=Microsoft%20Azure&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-336791?style=flat-square&logo=postgresql&logoColor=white)
+
+### ⚙️ GitHub Stats
+![Elliott's GitHub Stats](https://github-readme-stats.vercel.app/api?username=elliottfairhall&show_icons=true&theme=radical)
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=elliottfairhall&layout=compact&theme=radical)
+
+---
+
+### 📈 Recent Blog Posts
+<!-- BLOG-POST-LIST:START -->
+<!-- BLOG-POST-LIST:END -->
+
+*(The list above is updated regularly via a GitHub action)*
