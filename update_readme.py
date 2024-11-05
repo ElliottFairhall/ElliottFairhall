@@ -1,32 +1,157 @@
+"""
+===================================================
+Filename: update_readme.py
+Created Date: 09-09-2024
+Author: Elliott Fairhall
+Email: elliott@elliottfairhall.dev
+Version: 1.0
+
+Purpose:
+--------
+This script automates the process of updating the README.md file in a GitHub repository 
+with the latest blog posts from Medium and Data Flakes personal website RSS feeds. 
+It checks for new posts, ensures the connections to the feeds are valid, and updates 
+the README.md only if new posts are found. The script is designed to run within a 
+GitHub Action workflow.
+
+Revision History:
+-----------------
+09-09-2024: Redesign of solution to meet new standards. (Elliott Fairhall)
+===================================================
+"""
+
 import feedparser
+import logging
+import requests
 
-RSS_FEED_URL = "https://medium.com/feed/@ElliottFairhall"
+# Constants for the RSS feed URLs and the maximum number of posts to display
+MEDIUM_RSS_FEED_URL = "https://medium.com/feed/@ElliottFairhall"
+DATA_FLAKES_RSS_FEED_URL = "https://data-flakes.dev/feed"
 MAX_POSTS = 5
+TIMEOUT = 10  # Timeout for connection testing (in seconds)
 
-def fetch_medium_posts():
-    feed = feedparser.parse(RSS_FEED_URL)
-    posts = []
-    for entry in feed.entries[:MAX_POSTS]:
-        posts.append(f"- [{entry.title}]({entry.link})")
-    return posts
+# Set up logging for debugging and error handling
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-def update_readme(posts):
-    with open("README.md", "r") as file:
-        lines = file.readlines()
+def test_connection(url):
+    """
+    Test if a URL is reachable by making a HEAD request.
+    
+    Parameters:
+    url (str): The URL to test.
 
-    with open("README.md", "w") as file:
-        in_blog_section = False
-        for line in lines:
-            if line.strip() == "<!-- BLOG-POST-LIST:START -->":
-                in_blog_section = True
-                file.write(line)
-                for post in posts:
-                    file.write(f"{post}\n")
-            elif line.strip() == "<!-- BLOG-POST-LIST:END -->":
-                in_blog_section = False
-            if not in_blog_section:
-                file.write(line)
+    Returns:
+    bool: True if the URL is reachable, False otherwise.
+    """
+    try:
+        response = requests.head(url, timeout=TIMEOUT)
+        if response.status_code == 200:
+            logging.info(f"Successfully connected to {url}")
+            return True
+        else:
+            logging.error(f"Failed to connect to {url}. Status code: {response.status_code}")
+            return False
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Error connecting to {url}: {str(e)}")
+        return False
+
+def fetch_posts_from_feed(feed_url):
+    """
+    Fetches and parses posts from an RSS feed URL.
+    
+    Parameters:
+    feed_url (str): The URL of the RSS feed to fetch posts from.
+
+    Returns:
+    list: A list of formatted strings containing post titles and URLs.
+    """
+    try:
+        # Parse the RSS feed
+        feed = feedparser.parse(feed_url)
+        posts = []
+
+        # Check for parsing errors
+        if feed.bozo:
+            logging.error(f"Error parsing feed {feed_url}: {feed.bozo_exception}")
+            return posts
+
+        # Extract and format posts (limit to MAX_POSTS)
+        for entry in feed.entries[:MAX_POSTS]:
+            posts.append(f"- [{entry.title}]({entry.link})")
+        logging.info(f"Successfully fetched {len(posts)} posts from {feed_url}")
+        return posts
+
+    except Exception as e:
+        logging.error(f"Failed to fetch posts from {feed_url}: {str(e)}")
+        return []
+
+def update_readme(medium_posts, data_flakes_posts):
+    """
+    Updates the README.md file with the fetched blog posts if new posts are found.
+
+    Parameters:
+    medium_posts (list): List of Medium blog posts.
+    data_flakes_posts (list): List of Data Flakes blog posts.
+    """
+    try:
+        with open("README.md", "r") as file:
+            lines = file.readlines()
+
+        # Open README.md in write mode
+        with open("README.md", "w") as file:
+            in_blog_section = False
+            for line in lines:
+                if line.strip() == "<!-- BLOG-POST-LIST:START -->":
+                    # Start of blog post list section
+                    in_blog_section = True
+                    file.write(line)
+
+                    # Only write posts if there are any new posts
+                    if medium_posts or data_flakes_posts:
+                        if medium_posts:
+                            file.write("### Latest Medium Posts\n")
+                            for post in medium_posts:
+                                file.write(f"{post}\n")
+
+                        if data_flakes_posts:
+                            file.write("\n### Latest Data Flakes Posts\n")
+                            for post in data_flakes_posts:
+                                file.write(f"{post}\n")
+
+                elif line.strip() == "<!-- BLOG-POST-LIST:END -->":
+                    # End of blog post list section
+                    in_blog_section = False
+                    file.write(line)
+
+                if not in_blog_section:
+                    file.write(line)
+
+        logging.info("README.md successfully updated with the latest blog posts.")
+
+    except Exception as e:
+        logging.error(f"Failed to update README.md: {str(e)}")
 
 if __name__ == "__main__":
-    posts = fetch_medium_posts()
-    update_readme(posts)
+    # Test connection to Medium and Data Flakes before fetching posts
+    medium_posts = []
+    data_flakes_posts = []
+
+    # Test Medium feed connection
+    if test_connection(MEDIUM_RSS_FEED_URL):
+        medium_posts = fetch_posts_from_feed(MEDIUM_RSS_FEED_URL)
+    else:
+        logging.warning("Skipping Medium feed due to connection issues.")
+
+    # Test Data Flakes feed connection
+    if test_connection(DATA_FLAKES_RSS_FEED_URL):
+        data_flakes_posts = fetch_posts_from_feed(DATA_FLAKES_RSS_FEED_URL)
+    else:
+        logging.warning("Skipping Data Flakes feed due to connection issues.")
+
+    # Only update README if there are new posts from either Medium or Data Flakes
+    if medium_posts or data_flakes_posts:
+        logging.info("Updating README with new posts.")
+        update_readme(medium_posts, data_flakes_posts)
+    else:
+        logging.info("No new posts available from either Medium or Data Flakes. Skipping README update.")
+

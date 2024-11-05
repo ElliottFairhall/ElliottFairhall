@@ -69,5 +69,6 @@ Feel free to reach out via email: [elliott@elliottfairhall.dev](mailto:elliott@e
 
 ### :mailbox: Connect with Me :
 
-[![LinkedIn Badge](https://img.shields.io/badge/-ElliottFairhall-blue?style=flat&logo=Linkedin&logoColor=white)]([your-linkedin-url](https://www.linkedin.com/in/elliott-fairhall-mih-666945105/))
+[![LinkedIn Badge](https://img.shields.io/badge/-ElliottFairhall-blue?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/elliott-fairhall-mih-666945105/)
 [![X Badge](https://img.shields.io/badge/-ElliottFairhall-1DA1F2?style=flat&logo=X&logoColor=white)](https://x.com/FairhallElliott)
+
