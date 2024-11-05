@@ -17,6 +17,7 @@ GitHub Action workflow.
 Revision History:
 -----------------
 09-09-2024: Redesign of solution to meet new standards. (Elliott Fairhall)
+05-11-2024: Implemented more error handling and ensured that tests are completed before continuing. (Elliott Fairhall)
 ===================================================
 """
 
@@ -87,7 +88,7 @@ def fetch_posts_from_feed(feed_url):
 
 def update_readme(medium_posts, data_flakes_posts):
     """
-    Updates the README.md file with the fetched blog posts if new posts are found.
+    Updates the README.md file with the fetched blog posts.
 
     Parameters:
     medium_posts (list): List of Medium blog posts.
@@ -95,36 +96,33 @@ def update_readme(medium_posts, data_flakes_posts):
     """
     try:
         with open("README.md", "r") as file:
-            lines = file.readlines()
+            content = file.read()
 
-        # Open README.md in write mode
+        # Markers in README.md to indicate where to insert the blog posts
+        start_marker = "<!-- BLOG-POST-LIST:START -->"
+        end_marker = "<!-- BLOG-POST-LIST:END -->"
+        start_index = content.find(start_marker) + len(start_marker)
+        end_index = content.find(end_marker)
+
+        if start_index == -1 or end_index == -1:
+            logging.error("Blog post markers not found in README.md.")
+            return
+
+        # Build the new content to insert
+        new_content = content[:start_index] + "\n"
+
+        if medium_posts:
+            new_content += "### Latest Medium Posts\n"
+            new_content += "\n".join(medium_posts) + "\n\n"
+
+        if data_flakes_posts:
+            new_content += "### Latest Data Flakes Posts\n"
+            new_content += "\n".join(data_flakes_posts) + "\n"
+
+        new_content += content[end_index:]
+
         with open("README.md", "w") as file:
-            in_blog_section = False
-            for line in lines:
-                if line.strip() == "<!-- BLOG-POST-LIST:START -->":
-                    # Start of blog post list section
-                    in_blog_section = True
-                    file.write(line)
-
-                    # Only write posts if there are any new posts
-                    if medium_posts or data_flakes_posts:
-                        if medium_posts:
-                            file.write("### Latest Medium Posts\n")
-                            for post in medium_posts:
-                                file.write(f"{post}\n")
-
-                        if data_flakes_posts:
-                            file.write("\n### Latest Data Flakes Posts\n")
-                            for post in data_flakes_posts:
-                                file.write(f"{post}\n")
-
-                elif line.strip() == "<!-- BLOG-POST-LIST:END -->":
-                    # End of blog post list section
-                    in_blog_section = False
-                    file.write(line)
-
-                if not in_blog_section:
-                    file.write(line)
+            file.write(new_content)
 
         logging.info("README.md successfully updated with the latest blog posts.")
 
@@ -132,26 +130,25 @@ def update_readme(medium_posts, data_flakes_posts):
         logging.error(f"Failed to update README.md: {str(e)}")
 
 if __name__ == "__main__":
-    # Test connection to Medium and Data Flakes before fetching posts
+    # Initialize lists to hold the posts
     medium_posts = []
     data_flakes_posts = []
 
-    # Test Medium feed connection
+    # Fetch Medium posts if the connection is successful
     if test_connection(MEDIUM_RSS_FEED_URL):
         medium_posts = fetch_posts_from_feed(MEDIUM_RSS_FEED_URL)
     else:
         logging.warning("Skipping Medium feed due to connection issues.")
 
-    # Test Data Flakes feed connection
+    # Fetch Data Flakes posts if the connection is successful
     if test_connection(DATA_FLAKES_RSS_FEED_URL):
         data_flakes_posts = fetch_posts_from_feed(DATA_FLAKES_RSS_FEED_URL)
     else:
         logging.warning("Skipping Data Flakes feed due to connection issues.")
 
-    # Only update README if there are new posts from either Medium or Data Flakes
+    # Update README.md if there are new posts
     if medium_posts or data_flakes_posts:
         logging.info("Updating README with new posts.")
         update_readme(medium_posts, data_flakes_posts)
     else:
         logging.info("No new posts available from either Medium or Data Flakes. Skipping README update.")
-
