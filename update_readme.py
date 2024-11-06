@@ -27,7 +27,7 @@ import requests
 
 # Constants for the RSS feed URLs and the maximum number of posts to display
 MEDIUM_RSS_FEED_URL = "https://medium.com/feed/@ElliottFairhall"
-DATA_FLAKES_RSS_FEED_URL = "https://data-flakes.dev/feed"
+DATA_FLAKES_RSS_FEED_URL = "https://www.data-flakes.dev/rss-featured.xml"
 MAX_POSTS = 5
 TIMEOUT = 10  # Timeout for connection testing (in seconds)
 
