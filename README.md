@@ -65,6 +65,8 @@ Feel free to reach out via email: [elliott@elliottfairhall.dev](mailto:elliott@e
 - [Understanding and Developing Emotional Intelligence: A Guide to Improving Success and Well-Being](https://medium.com/@ElliottFairhall/understanding-and-developing-emotional-intelligence-a-guide-to-improving-success-and-well-being-8a0fa277623d?source=rss-9309b94bc54a------2)
 - [Understanding the Differences between OLAP and OLTP](https://medium.com/@ElliottFairhall/understanding-the-differences-between-olap-and-oltp-f3cb9778a592?source=rss-9309b94bc54a------2)
 
+### Latest Data Flakes Posts
+- [An Overview of Snowflakes Data Cloud](https://www.data-flakes.dev/posts/overview-snowflakes-data-cloud/)
 <!-- BLOG-POST-LIST:END -->
 
 ---
