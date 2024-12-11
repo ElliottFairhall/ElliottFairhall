@@ -66,11 +66,11 @@ Feel free to reach out via email: [elliott@elliottfairhall.dev](mailto:elliott@e
 - [Understanding the Differences between OLAP and OLTP](https://medium.com/@ElliottFairhall/understanding-the-differences-between-olap-and-oltp-f3cb9778a592?source=rss-9309b94bc54a------2)
 
 ### Latest Data Flakes Posts
+- [Snowflake Resource Monitors - This is Important](https://www.data-flakes.dev/posts/snowflake-resource-monitors-this-is-important/)
+- [Snowflake Warehouse Sizing - A Comprehensive Guide](https://www.data-flakes.dev/posts/snowflake-warehouse-sizing-a-comprehensive-guide/)
 - [Understanding Snowflakes Data Lifecycle Operations](https://www.data-flakes.dev/posts/understanding-snowflake-data-lifecycle-operations/)
 - [Features and Capabilities of Snowflake Editions](https://www.data-flakes.dev/posts/features-capabilities-snowflake-editions/)
 - [Mastering SnowSQL - The Command-Line Client for Snowflake](https://www.data-flakes.dev/posts/mastering-snowsql-command-line-client-snowflake/)
-- [Monitoring and Managing Your Snowflake Account with Account Usage and Information Schema](https://www.data-flakes.dev/posts/monitoring-snowflake-account-usage-information-schema/)
-- [Understanding the Difference Between Data Masking and Row-Level Security in Snowflake](https://www.data-flakes.dev/posts/difference-between-data-masking-and-row-level-security-snowflake/)
 <!-- BLOG-POST-LIST:END -->
 
 ---
