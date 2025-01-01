@@ -66,11 +66,11 @@ Feel free to reach out via email: [elliott@elliottfairhall.dev](mailto:elliott@e
 - [Understanding the Differences between OLAP and OLTP](https://medium.com/@ElliottFairhall/understanding-the-differences-between-olap-and-oltp-f3cb9778a592?source=rss-9309b94bc54a------2)
 
 ### Latest Data Flakes Posts
+- [A Quick Overview of Dynamic Data Masking in Snowflake](https://www.data-flakes.dev/posts/quick-overview-dynamic-data-masking-snowflake/)
+- [Snowflakes Commitment to Seamless Updates and Innovation](https://www.data-flakes.dev/posts/snowflake-seamless-updates-innovation/)
+- [Understanding Snowflakes Data Storage and Transfer Costs](https://www.data-flakes.dev/posts/snowflake-storage-transfer-costs/)
+- [Exploring Snowflakes Architecture - The Three Distinct Layers](https://www.data-flakes.dev/posts/exploring-snowflakes-architecture-the-three-distinct-layers/)
 - [Snowflake Resource Monitors - This is Important](https://www.data-flakes.dev/posts/snowflake-resource-monitors-this-is-important/)
-- [Snowflake Warehouse Sizing - A Comprehensive Guide](https://www.data-flakes.dev/posts/snowflake-warehouse-sizing-a-comprehensive-guide/)
-- [Understanding Snowflakes Data Lifecycle Operations](https://www.data-flakes.dev/posts/understanding-snowflake-data-lifecycle-operations/)
-- [Features and Capabilities of Snowflake Editions](https://www.data-flakes.dev/posts/features-capabilities-snowflake-editions/)
-- [Mastering SnowSQL - The Command-Line Client for Snowflake](https://www.data-flakes.dev/posts/mastering-snowsql-command-line-client-snowflake/)
 <!-- BLOG-POST-LIST:END -->
 
 ---
