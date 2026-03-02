@@ -1,10 +1,11 @@
-"""
+"""Automates updating README.md with the latest blog posts from Medium and Data Flakes RSS feeds.
+
 ===================================================
 Filename: update_readme.py
 Created Date: 09-09-2024
 Author: Elliott Fairhall
 Email: elliott@elliottfairhall.dev
-Version: 1.1
+Version: 1.2
 
 Purpose:
 --------
@@ -19,20 +20,22 @@ Revision History:
 09-09-2024: Redesign of solution to meet new standards. (Elliott Fairhall)
 05-11-2024: Implemented more error handling and ensured that tests are completed before continuing. (Elliott Fairhall)
 25-01-2026: Refactored for Ruff standards, added type hints and Google-style docstrings. (Antigravity AI)
+02-03-2026: Switched Data Flakes feed from rss-featured.xml to rss.xml for full post coverage. (Elliott Fairhall)
 ===================================================
 """
 
 import logging
-from typing import List, Optional
+from pathlib import Path
 
 import feedparser
 import requests
 
 # Constants for the RSS feed URLs and the maximum number of posts to display
 MEDIUM_RSS_FEED_URL = "https://medium.com/feed/@ElliottFairhall"
-DATA_FLAKES_RSS_FEED_URL = "https://www.data-flakes.dev/rss-featured.xml"
+DATA_FLAKES_RSS_FEED_URL = "https://www.data-flakes.dev/rss.xml"
 MAX_POSTS = 5
 TIMEOUT = 10  # Timeout for connection testing (in seconds)
+HTTP_OK = 200
 
 # Set up logging for debugging and error handling
 logging.basicConfig(
@@ -51,17 +54,19 @@ def test_connection(url: str) -> bool:
     """
     try:
         response = requests.head(url, timeout=TIMEOUT)
-        if response.status_code == 200:
+        if response.status_code == HTTP_OK:
             logging.info("Successfully connected to %s", url)
             return True
-        logging.error("Failed to connect to %s. Status code: %d", url, response.status_code)
+        logging.error(
+            "Failed to connect to %s. Status code: %d", url, response.status_code
+        )
         return False
     except requests.exceptions.RequestException as e:
         logging.error("Error connecting to %s: %s", url, str(e))
         return False
 
 
-def fetch_posts_from_feed(feed_url: str) -> List[str]:
+def fetch_posts_from_feed(feed_url: str) -> list[str]:
     """Fetches and parses posts from an RSS feed URL.
 
     Args:
@@ -71,18 +76,15 @@ def fetch_posts_from_feed(feed_url: str) -> List[str]:
         A list of formatted strings containing post titles and URLs in markdown format.
     """
     try:
-        # Parse the RSS feed
         feed = feedparser.parse(feed_url)
-        posts = []
 
-        # Check for parsing errors
         if feed.bozo:
             logging.error("Error parsing feed %s: %s", feed_url, feed.bozo_exception)
-            return posts
+            return []
 
-        # Extract and format posts (limit to MAX_POSTS)
-        for entry in feed.entries[:MAX_POSTS]:
-            posts.append(f"- [{entry.title}]({entry.link})")
+        posts: list[str] = [
+            f"- [{entry.title}]({entry.link})" for entry in feed.entries[:MAX_POSTS]
+        ]
         logging.info("Successfully fetched %d posts from %s", len(posts), feed_url)
         return posts
 
@@ -91,7 +93,7 @@ def fetch_posts_from_feed(feed_url: str) -> List[str]:
         return []
 
 
-def update_readme(medium_posts: List[str], data_flakes_posts: List[str]) -> None:
+def update_readme(medium_posts: list[str], data_flakes_posts: list[str]) -> None:
     """Updates the README.md file with the fetched blog posts.
 
     Args:
@@ -99,8 +101,8 @@ def update_readme(medium_posts: List[str], data_flakes_posts: List[str]) -> None
         data_flakes_posts: List of formatted Data Flakes blog post strings.
     """
     try:
-        with open("README.md", "r", encoding="utf-8") as file:
-            content = file.read()
+        readme = Path("README.md")
+        content = readme.read_text(encoding="utf-8")
 
         # Markers in README.md to indicate where to insert the blog posts
         start_marker = "<!-- BLOG-POST-LIST:START -->"
@@ -127,8 +129,7 @@ def update_readme(medium_posts: List[str], data_flakes_posts: List[str]) -> None
 
         # Only write if content has changed to avoid unnecessary commits
         if content != new_content:
-            with open("README.md", "w", encoding="utf-8") as file:
-                file.write(new_content)
+            readme.write_text(new_content, encoding="utf-8")
             logging.info("README.md successfully updated with the latest blog posts.")
         else:
             logging.info("No changes to README.md detected. Skipping write.")
@@ -139,9 +140,8 @@ def update_readme(medium_posts: List[str], data_flakes_posts: List[str]) -> None
 
 def main() -> None:
     """Main execution block to fetch posts and update the README."""
-    # Initialize lists to hold the posts
-    m_posts: List[str] = []
-    df_posts: List[str] = []
+    m_posts: list[str] = []
+    df_posts: list[str] = []
 
     # Fetch Medium posts if the connection is successful
     if test_connection(MEDIUM_RSS_FEED_URL):
