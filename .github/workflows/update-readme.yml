@@ -10,19 +10,15 @@ on:
 
 jobs:
   update-readme:
-    runs-on: ubuntu-latest
+    runs-on: python
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
 
       - name: Install Feedparser
         run: pip install feedparser
-      
+
       - name: Install Requests
         run: pip install requests
 
