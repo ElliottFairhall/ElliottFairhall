@@ -101,18 +101,20 @@ def update_readme(medium_posts: list[str], data_flakes_posts: list[str]) -> None
         data_flakes_posts: List of formatted Data Flakes blog post strings.
     """
     try:
-        readme = Path("README.md")
+        readme = Path(__file__).parent / "README.md"
         content = readme.read_text(encoding="utf-8")
 
         # Markers in README.md to indicate where to insert the blog posts
         start_marker = "<!-- BLOG-POST-LIST:START -->"
         end_marker = "<!-- BLOG-POST-LIST:END -->"
-        start_index = content.find(start_marker) + len(start_marker)
+        start_pos = content.find(start_marker)
         end_index = content.find(end_marker)
 
-        if start_index == -1 or end_index == -1:
+        if start_pos == -1 or end_index == -1:
             logging.error("Blog post markers not found in README.md.")
             return
+
+        start_index = start_pos + len(start_marker)
 
         # Build the new content to insert
         new_content = content[:start_index] + "\n"
