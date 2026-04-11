@@ -53,12 +53,22 @@ ______________________________________________________________________
 ### ✍️ Latest Blog Posts
 
 <!-- BLOG-POST-LIST:START -->
+
 ### Latest Medium Posts
+
 - [Rethinking Learning: AI, Technology, and Respecting Neurodiversity](https://medium.com/@ElliottFairhall/rethinking-learning-ai-technology-and-respecting-neurodiversity-6fbb93bc232e?source=rss-9309b94bc54a------2)
 - [AI in Education: A Force for Good — If We’re Brave Enough to Redesign](https://medium.com/@ElliottFairhall/ai-in-education-a-force-for-good-if-were-brave-enough-to-redesign-bd8f82e2a5bc?source=rss-9309b94bc54a------2)
 - [Quiet Quitting Isn’t Laziness — It’s a Wake-Up Call for Business Leaders](https://medium.com/@ElliottFairhall/quiet-quitting-isnt-laziness-it-s-a-wake-up-call-for-business-leaders-ddcbe3f6854f?source=rss-9309b94bc54a------2)
 - [An Introduction to Machine Learning](https://medium.com/@ElliottFairhall/an-introduction-to-machine-learning-32f889ffd81a?source=rss-9309b94bc54a------2)
 - [Ikigai: The Best Thing You Will Learn Today](https://medium.com/@ElliottFairhall/ikigai-the-best-thing-you-will-learn-today-d18f2f8ce34a?source=rss-9309b94bc54a------2)
+
+### Latest Data Flakes Posts
+
+- [Feature Engineering in Snowflake: Preparing Data for Machine Learning](https://data-flakes.dev/blog/feature-engineering-in-snowflake)
+- [Implementing Machine Learning Workloads in Snowflake](https://data-flakes.dev/blog/machine-learning-in-snowflake)
+- [Project Snowwork: Snowflake AI for Business Users](https://data-flakes.dev/blog/project-snowwork-snowflake-business-users)
+- [Continuous Data Replication to Snowflake with Oracle GoldenGate](https://data-flakes.dev/blog/oracle-goldengate-snowflake-replication)
+- [Building a True Lakehouse with Snowflake Postgres and pg_lake](https://data-flakes.dev/blog/snowflake-postgres-pg-lake-lakehouse)
 
 <!-- BLOG-POST-LIST:END -->
 
