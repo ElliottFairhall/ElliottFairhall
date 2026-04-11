@@ -36,6 +36,7 @@ DATA_FLAKES_RSS_FEED_URL = "https://www.data-flakes.dev/rss.xml"
 MAX_POSTS = 5
 TIMEOUT = 10  # Timeout for connection testing (in seconds)
 HTTP_OK = 200
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 
 # Set up logging for debugging and error handling
 logging.basicConfig(
@@ -53,7 +54,9 @@ def test_connection(url: str) -> bool:
         True if the URL is reachable (status code 200), False otherwise.
     """
     try:
-        response = requests.head(url, timeout=TIMEOUT)
+        response = requests.head(
+            url, timeout=TIMEOUT, headers={"User-Agent": USER_AGENT}
+        )
         if response.status_code == HTTP_OK:
             logging.info("Successfully connected to %s", url)
             return True
@@ -76,7 +79,7 @@ def fetch_posts_from_feed(feed_url: str) -> list[str]:
         A list of formatted strings containing post titles and URLs in markdown format.
     """
     try:
-        feed = feedparser.parse(feed_url)
+        feed = feedparser.parse(feed_url, agent=USER_AGENT)
 
         if feed.bozo:
             logging.error("Error parsing feed %s: %s", feed_url, feed.bozo_exception)
