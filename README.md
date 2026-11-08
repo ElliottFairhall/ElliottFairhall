@@ -1,5 +1,7 @@
 # Elliott Fairhall 👋
 
+> Architecture and design rationale: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+
 ### Data Engineer & Snowflake Specialist
 
 > **Transforming complexity into clarity, turning data into outcomes that matter with Snowflake and Azure.**
@@ -15,7 +17,7 @@ ______________________________________________________________________
 
 ### 💼 Professional Journey
 
-I'm a Data Engineer at **Clekt** (Official Snowflake Service partner). My background in retail and hospitality
+I'm a Data Engineer at **Karasu** (Official Snowflake Service partner). My background in retail and hospitality
 leadership uniquely informs my methodical approach to technical operations and management.
 
 - **Focus**: Snowflake, Azure, Python, SQL, dbt
